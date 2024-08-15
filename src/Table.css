@@ -1,5 +1,5 @@
 .table-container {
-    width: 250px;
+    width: 300px;
     height: 420px;
     margin: 4px;
     background-color: rgb(85, 80, 85);
@@ -23,6 +23,18 @@
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #f0f0f0;
+}
+
+.td-slotname {
+    width: 25%
+}
+
+.td-slotform {
+    width: 60%;
+}
+
+.td-slotsuccess {
+    width: 15%
 }
 
 .custom-table th {
