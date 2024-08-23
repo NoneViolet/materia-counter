@@ -6,23 +6,33 @@ import "./App.css"
 
 function App() {
   const gearList = ["メイン", "サブ", "頭", "胴", "手", "脚", "足", "耳", "首", "腕", "指1", "指2"];
-  const thresholdAccesory = 7;
-  const materiaList = ["",
-    "武略 大 CRT", "武略 小 CRT", "天眼 大 DH", "天眼 小 DH", "雄略 大 DET", "雄略 小 DET",
-    "戦技 大 SKS", "戦技 小 SKS", "詠唱 大 SPS", "詠唱 小 SPS",
-    "剛柔 大 TEN", "剛柔 小 TEN", "信力 大 PIE", "信力 小 PIE",
-    "達識 大 GATH", "達識 小 GATH", "博識 大 PERC", "博識 小 PERC", "器識 大 GP", "器識 小 GP",
-    "名匠 大 CRFT", "名匠 小 CRFT", "巨匠 大 CNTL", "巨匠 小 CNTL", "魔匠 大 CP", "魔匠 小 CP"
-  ];
-
   const successRateMeldArmor = [1, 1, 0.17, 0.1, 0.07];
   const successRateMeldAccessory = [1, 0.17, 0.1, 0.07, 0.05];
-  const successRateSpecial = [1, 1, 1, 1, 1]
+  const successRateSpecial = [1, 1, 1, 1, 1];
+  const thresholdAccesory = 7;
 
   const [allMateriaSlot, setAllMateriaSlot] = useState(gearList.map(() => Array(5).fill("")));
   const [allSuccessRate, setAllSuccessRate] = useState(gearList.map(() => Array(5).fill(0)));
   const [allGearConfig, setAllGearConfig] = useState(Array(gearList.length).fill("禁断"));
+  const [materiaGenre, setMateriaGenre] = useState("すべて");
   const [CProb, setCProb] = useState(0.9);
+  const materiaOption = {
+    "すべて": ["",
+      "武略 大 CRT", "武略 小 CRT", "天眼 大 DH", "天眼 小 DH", "雄略 大 DET", "雄略 小 DET",
+      "戦技 大 SKS", "戦技 小 SKS", "詠唱 大 SPS", "詠唱 小 SPS",
+      "剛柔 大 TEN", "剛柔 小 TEN", "信力 大 PIE", "信力 小 PIE",
+      "達識 大 GATH", "達識 小 GATH", "博識 大 PERC", "博識 小 PERC", "器識 大 GP", "器識 小 GP",
+      "名匠 大 CRFT", "名匠 小 CRFT", "巨匠 大 CNTL", "巨匠 小 CNTL", "魔匠 大 CP", "魔匠 小 CP"],
+    "戦闘": ["",
+      "武略 大 CRT", "武略 小 CRT", "天眼 大 DH", "天眼 小 DH", "雄略 大 DET", "雄略 小 DET",
+      "戦技 大 SKS", "戦技 小 SKS", "詠唱 大 SPS", "詠唱 小 SPS",
+      "剛柔 大 TEN", "剛柔 小 TEN", "信力 大 PIE", "信力 小 PIE"],
+    "採取": ["",
+      "達識 大 GATH", "達識 小 GATH", "博識 大 PERC", "博識 小 PERC", "器識 大 GP", "器識 小 GP"],
+    "製作": ["",
+      "名匠 大 CRFT", "名匠 小 CRFT", "巨匠 大 CNTL", "巨匠 小 CNTL", "魔匠 大 CP", "魔匠 小 CP"]
+  }
+  const materiaList = materiaOption[materiaGenre];
 
   useEffect(() => {
     const newSuccessRate = [...allSuccessRate];
@@ -56,6 +66,11 @@ function App() {
     });
     setAllMateriaSlot(newMateriaSlot)
     console.log(allMateriaSlot)
+  }
+
+  const onChangeGenre = (genre) => {
+    setAllMateriaSlot(gearList.map(() => Array(5).fill("")));
+    setMateriaGenre(genre)
   }
 
   const updateGearConfig = (gearIndex, type) => {
@@ -97,6 +112,8 @@ function App() {
             <Toolbar
               CProb={CProb}
               setCProb={setCProb}
+              materiaGenre={materiaGenre}
+              setMateriaGenre={(genre) => onChangeGenre(genre)}
             /> <br />
             <Result
               CProb={CProb}
