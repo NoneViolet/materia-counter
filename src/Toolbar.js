@@ -19,14 +19,13 @@ const Toolbar = ({ CProb, setCProb }) => {
     };
 
     return (
-        <>
-            <div className="container">
-                <form>
-                    <label>累積確率:</label>
-                    <input type="number" value={CProbDisp} onChange={handleChangeCProb}></input>
-                </form>
-            </div>
-        </>
+        <div className="container">
+            <h5>設定</h5>
+            <form className="CPForm">
+                <label>累積確率:</label><br />
+                <input type="number" style={{ width: 80 }} value={CProbDisp} onChange={handleChangeCProb}></input>
+            </form>
+        </div>
     )
 }
 

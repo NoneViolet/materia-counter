@@ -28,18 +28,16 @@ const Result = ({ CProb, allSuccessRate, allMateriaSlot }) => {
     }
 
     return (
-        <>
-            <div>
-                <h5>マテリア必要数</h5>
-                <ul>
-                    {Object.entries(allMateriaCount()).map(([materia, count]) => (
-                        <li key={materia}>
-                            {materia}: {count} 個
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </>
+        <div className="container">
+            <h5>必要数</h5>
+            <ul>
+                {Object.entries(allMateriaCount()).map(([materia, count]) => (
+                    <li key={materia}>
+                        {materia.split(" ")[0]}: {count} 個
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 }
 

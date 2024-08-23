@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Table.css"
 
-const MeldArmor = ({ gearName, materiaList, successRate, selectedMateria, onMateriaChange, gearConfig, onGearChange }) => {
+const MateriaPicker = ({ gearName, materiaList, successRate, selectedMateria, onMateriaChange, gearConfig, onGearChange }) => {
     const [slotNumber, setSlotNumber] = useState(5);
     useEffect(() => {
         if (gearConfig === "確定3枠") {
@@ -54,4 +54,4 @@ const MeldArmor = ({ gearName, materiaList, successRate, selectedMateria, onMate
     );
 };
 
-export default MeldArmor;
+export default MateriaPicker;

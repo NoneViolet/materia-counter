@@ -1,4 +1,5 @@
     body {
+        white-space: nowrap;
         background-color: rgb(55, 50, 55);
         color: rgb(210, 210, 210);
     }

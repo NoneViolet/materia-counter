@@ -1,4 +1,4 @@
-import MeldArmor from "./MeldArmor"
+import MateriaPicker from "./MateriaPicker"
 import Result from "./Result"
 import Toolbar from "./Toolbar";
 import { useEffect, useState } from "react";
@@ -73,7 +73,7 @@ function App() {
     for (let gearIndex = 0; gearIndex < gearList.length; gearIndex++) {
 
       allGearUI.push(
-        <MeldArmor
+        <MateriaPicker
           gearName={gearList[gearIndex]}
           successRate={allSuccessRate[gearIndex]}
           materiaList={materiaList}
@@ -93,7 +93,7 @@ function App() {
       <header><h1>マテリア禁断計算</h1></header>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-2 col-xs-12 fixed-toolbar">
+          <div className=" col-md-2 col-12 fixed-toolbar">
             <Toolbar
               CProb={CProb}
               setCProb={setCProb}

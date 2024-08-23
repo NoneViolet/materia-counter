@@ -52,8 +52,10 @@
 }
 
 .form-materia {
+    box-sizing: border-box;
     width: 100%;
-    padding: 10px;
+    height: 43px;
+    padding: 0px 10px;
     border: 1px solid #ced4da;
     border-radius: 4px;
 }
