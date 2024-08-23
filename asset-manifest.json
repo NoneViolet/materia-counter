@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/materia-counter/static/css/main.8deb4193.css",
-    "main.js": "/materia-counter/static/js/main.39122d4a.js",
+    "main.js": "/materia-counter/static/js/main.39fdcf43.js",
     "static/js/453.134c1367.chunk.js": "/materia-counter/static/js/453.134c1367.chunk.js",
     "index.html": "/materia-counter/index.html",
     "main.8deb4193.css.map": "/materia-counter/static/css/main.8deb4193.css.map",
-    "main.39122d4a.js.map": "/materia-counter/static/js/main.39122d4a.js.map",
+    "main.39fdcf43.js.map": "/materia-counter/static/js/main.39fdcf43.js.map",
     "453.134c1367.chunk.js.map": "/materia-counter/static/js/453.134c1367.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8deb4193.css",
-    "static/js/main.39122d4a.js"
+    "static/js/main.39fdcf43.js"
   ]
 }
