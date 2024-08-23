@@ -129,6 +129,7 @@ function App() {
           </div>
         </div>
       </div>
+      <p style={{ whiteSpace: "normal" }}>※累積確率は、各スロットにおいて必要数n個で禁断して成功する確率を表しています。</p>
       <footer>© SQUARE ENIX</footer>
     </>
   );
