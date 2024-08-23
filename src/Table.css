@@ -1,6 +1,6 @@
 .table-container {
     width: 300px;
-    height: 420px;
+    height: 430px;
     margin: 4px;
     background-color: rgb(85, 80, 85);
     padding: 10px;
@@ -51,9 +51,13 @@
     background-color: #f1f1f1;
 }
 
-.form-select {
+.form-materia {
     width: 100%;
     padding: 10px;
     border: 1px solid #ced4da;
     border-radius: 4px;
+}
+
+.form-type {
+    justify-content: end;
 }

@@ -1,12 +1,12 @@
 import MeldArmor from "./MeldArmor"
 import Result from "./Result"
 import Toolbar from "./Toolbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css"
 
 function App() {
-  const gearList = ["メイン", "サブ", "頭", "胴", "手", "脚", "足"]
-  const slotList = ["1 Slot", "2 Slot", "3 Slot", "4 Slot", "5 Slot"];
+  const gearList = ["メイン", "サブ", "頭", "胴", "手", "脚", "足", "耳", "首", "腕", "指1", "指2"];
+  const thresholdAccesory = 7;
   const materiaList = ["",
     "武略 大 CRT", "武略 小 CRT", "天眼 大 DH", "天眼 小 DH", "雄略 大 DET", "雄略 小 DET",
     "戦技 大 SKS", "戦技 小 SKS", "詠唱 大 SPS", "詠唱 小 SPS",
@@ -15,8 +15,30 @@ function App() {
     "名匠 大 CRFT", "名匠 小 CRFT", "巨匠 大 CNTL", "巨匠 小 CNTL", "魔匠 大 CP", "魔匠 小 CP"
   ];
 
+  const successRateMeldArmor = [1, 1, 0.17, 0.1, 0.07];
+  const successRateMeldAccessory = [1, 0.17, 0.1, 0.07, 0.05];
+  const successRateSpecial = [1, 1, 1, 1, 1]
+
   const [allMateriaSlot, setAllMateriaSlot] = useState(gearList.map(() => Array(5).fill("")));
+  const [allSuccessRate, setAllSuccessRate] = useState(gearList.map(() => Array(5).fill(0)));
+  const [allGearConfig, setAllGearConfig] = useState(Array(gearList.length).fill("禁断"));
   const [CProb, setCProb] = useState(0.9);
+
+  useEffect(() => {
+    const newSuccessRate = [...allSuccessRate];
+    for (let gearIndex = 0; gearIndex < gearList.length; gearIndex++) {
+      if (allGearConfig[gearIndex] === "禁断") {
+        if (gearIndex < thresholdAccesory) {
+          newSuccessRate[gearIndex] = successRateMeldArmor;
+        } else {
+          newSuccessRate[gearIndex] = successRateMeldAccessory;
+        }
+      } else {
+        newSuccessRate[gearIndex] = successRateSpecial;
+      }
+    }
+    setAllSuccessRate(newSuccessRate) //eslint-disable-next-line
+  }, [allGearConfig])
 
   const updateMateriaSlot = (gearIndex, slotIndex, materia) => {
     const newMateriaSlot = allMateriaSlot.map((searchGear, searchGearIndex) => {
@@ -36,6 +58,36 @@ function App() {
     console.log(allMateriaSlot)
   }
 
+  const updateGearConfig = (gearIndex, type) => {
+    const newGearConfig = [...allGearConfig];
+    newGearConfig[gearIndex] = type;
+    setAllGearConfig(newGearConfig);
+
+    const newAllMateriaSlot = [...allMateriaSlot];
+    newAllMateriaSlot[gearIndex] = Array(5).fill("");
+    setAllMateriaSlot(newAllMateriaSlot);
+  }
+
+  const setAllGearUI = () => {
+    const allGearUI = [];
+    for (let gearIndex = 0; gearIndex < gearList.length; gearIndex++) {
+
+      allGearUI.push(
+        <MeldArmor
+          gearName={gearList[gearIndex]}
+          successRate={allSuccessRate[gearIndex]}
+          materiaList={materiaList}
+          selectedMateria={allMateriaSlot[gearIndex]}
+          onMateriaChange={(slotIndex, materia) => updateMateriaSlot(gearIndex, slotIndex, materia)}
+          gearConfig={allGearConfig[gearIndex]}
+          onGearChange={(type) => updateGearConfig(gearIndex, type)}
+        />
+      )
+    }
+
+    return allGearUI
+  }
+
   return (
     <>
       <header><h1>マテリア禁断計算</h1></header>
@@ -45,27 +97,18 @@ function App() {
             <Toolbar
               CProb={CProb}
               setCProb={setCProb}
+            /> <br />
+            <Result
+              CProb={CProb}
+              allMateriaSlot={allMateriaSlot}
+              allSuccessRate={allSuccessRate}
             />
           </div>
 
           <div className="col-10">
             <div className="d-flex flex-wrap">
-              {gearList.map((gearName, gearIndex) => (
-                <MeldArmor
-                  gearName={gearName}
-                  slotList={slotList}
-                  materiaList={materiaList}
-                  selectedMateria={allMateriaSlot[gearIndex]}
-                  onMateriaChange={(materia, slotIndex) => updateMateriaSlot(gearIndex, slotIndex, materia)}
-                />
-              ))}
+              {setAllGearUI()}
             </div>
-          </div>
-          <div className="row">
-            <Result
-              CProb={CProb}
-              allMateriaSlot={allMateriaSlot}
-            />
           </div>
         </div>
       </div>

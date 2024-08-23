@@ -1,20 +1,31 @@
 import { useState } from "react"
 
 const Toolbar = ({ CProb, setCProb }) => {
+    const [CProbDisp, setCProbDisp] = useState(Math.round(CProb * 100));
 
-    const [CPConfig, setCPConfig] = useState(true); //TODO: 変数名をいい感じにする
-    const handleChangeCProb = (event) => { setCProb(event.target.value) };
+    const handleChangeCProb = (event) => {
+        let newCProbDisp = event.target.value;
+        if (newCProbDisp > 99) { newCProbDisp = 99 }
+        if (newCProbDisp < 1) { newCProbDisp = 1 }
+        try {
+            parseInt(newCProbDisp);
+        }
+        catch (Exception) {
+            return;
+        }
+
+        setCProb(Math.round(newCProbDisp / 100));
+        setCProbDisp(newCProbDisp);
+    };
 
     return (
         <>
-            (ここに単体の累積か全体かを決めるヤツを置く) <br /><br />
-            <form>
-                <label>累積確率:</label>
-                <input type="text" value={CProb} onChange={handleChangeCProb}></input>
-                <label>全体累積確率:</label>
-                <input type="text" value="TBD" disabled={CPConfig}></input>
-            </form>
-
+            <div className="container">
+                <form>
+                    <label>累積確率:</label>
+                    <input type="number" value={CProbDisp} onChange={handleChangeCProb}></input>
+                </form>
+            </div>
         </>
     )
 }

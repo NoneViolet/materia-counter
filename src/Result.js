@@ -1,38 +1,38 @@
 
-const Result = ({ CProb, allMateriaSlot }) => {
+const Result = ({ CProb, allSuccessRate, allMateriaSlot }) => {
 
-    const successRate = [1, 1, 0.17, 0.1, 0.07];
-
-    const calcNeedCount = (slotIndex) => {
-        console.log("Run Calc: target=>", CProb)
+    const calcNeedCount = (i, j) => {
         let count = 1;
         let currentCProb = 0;
         while (currentCProb <= CProb) {
-            if (successRate[slotIndex] >= CProb) {
+            if (allSuccessRate[i][j] >= CProb) {
                 break;
             }
-            currentCProb += ((1 - successRate[slotIndex]) ** (count - 1)) * successRate[slotIndex];
+            currentCProb += ((1 - allSuccessRate[i][j]) ** (count - 1)) * allSuccessRate[i][j];
             count += 1;
         }
         return count;
     }
 
-    const allMateriaArray = allMateriaSlot.flat();
-    const allMateriaCount = allMateriaArray.reduce((result, materia, index) => {
-        if (materia) {
-            const slotIndex = index % 5;
-            const count = calcNeedCount(slotIndex);
-            result[materia] = (result[materia] || 0) + count;
+    const allMateriaCount = () => {
+        let result = {};
+        for (let i = 0; i < allMateriaSlot.length; i++) {
+            for (let j = 0; j < allMateriaSlot[i].length; j++) {
+                if (allMateriaSlot[i][j].trim()) {
+                    const count = calcNeedCount(i, j);
+                    result[allMateriaSlot[i][j]] = (result[allMateriaSlot[i][j]] || 0) + count;
+                }
+            }
         }
         return result;
-    }, {})
+    }
 
     return (
         <>
             <div>
-                <h2>マテリア必要数</h2>
+                <h5>マテリア必要数</h5>
                 <ul>
-                    {Object.entries(allMateriaCount).map(([materia, count]) => (
+                    {Object.entries(allMateriaCount()).map(([materia, count]) => (
                         <li key={materia}>
                             {materia}: {count} 個
                         </li>
