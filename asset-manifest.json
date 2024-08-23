@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/materia-counter/static/css/main.3acb1aee.css",
+    "main.js": "/materia-counter/static/js/main.9f96fa53.js",
+    "static/js/453.134c1367.chunk.js": "/materia-counter/static/js/453.134c1367.chunk.js",
+    "index.html": "/materia-counter/index.html",
+    "main.3acb1aee.css.map": "/materia-counter/static/css/main.3acb1aee.css.map",
+    "main.9f96fa53.js.map": "/materia-counter/static/js/main.9f96fa53.js.map",
+    "453.134c1367.chunk.js.map": "/materia-counter/static/js/453.134c1367.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3acb1aee.css",
+    "static/js/main.9f96fa53.js"
+  ]
+}
