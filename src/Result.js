@@ -33,7 +33,7 @@ const Result = ({ CProb, allSuccessRate, allMateriaSlot }) => {
             <ul>
                 {Object.entries(allMateriaCount()).map(([materia, count]) => (
                     <li key={materia}>
-                        {materia.split(" ")[0]}: {count} 個
+                        {materia.split(" ")[0] + " " + materia.split(" ")[1]}: {count} 個
                     </li>
                 ))}
             </ul>
