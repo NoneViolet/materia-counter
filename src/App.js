@@ -11,6 +11,7 @@ function App() {
   const successRateSpecial = [1, 1, 1, 1, 1];
   const thresholdAccesory = 7;
 
+  const [slotError, setSlotError] = useState(false)
   const [allMateriaSlot, setAllMateriaSlot] = useState(gearList.map(() => Array(5).fill("")));
   const [allSuccessRate, setAllSuccessRate] = useState(gearList.map(() => Array(5).fill(0)));
   const [allGearConfig, setAllGearConfig] = useState(Array(gearList.length).fill("禁断"));
@@ -51,6 +52,17 @@ function App() {
   }, [allGearConfig])
 
   const updateMateriaSlot = (gearIndex, slotIndex, materia) => {
+    if (allGearConfig[slotIndex] === "禁断") {
+      if (gearIndex < thresholdAccesory && slotIndex > 2 && materia.split(" ")[1] === "大") {
+        setSlotError(true)
+      } else if (gearIndex >= thresholdAccesory && slotIndex > 1 && materia.split(" ")[1] === "大") {
+        setSlotError(true)
+      } else {
+        setSlotError(false)
+      }
+    } else {
+      setSlotError(false)
+    }
     const newMateriaSlot = allMateriaSlot.map((searchGear, searchGearIndex) => {
       if (searchGearIndex === gearIndex) {
         return searchGear.map((searchSlot, searchSlotIndex) => {
@@ -117,6 +129,7 @@ function App() {
             /> <br />
             <Result
               CProb={CProb}
+              slotError={slotError}
               allMateriaSlot={allMateriaSlot}
               allSuccessRate={allSuccessRate}
             />

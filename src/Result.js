@@ -1,5 +1,5 @@
 
-const Result = ({ CProb, allSuccessRate, allMateriaSlot }) => {
+const Result = ({ CProb, slotError, allSuccessRate, allMateriaSlot }) => {
 
     const calcNeedCount = (i, j) => {
         let count = 1;
@@ -27,9 +27,8 @@ const Result = ({ CProb, allSuccessRate, allMateriaSlot }) => {
         return result;
     }
 
-    return (
-        <div className="container">
-            <h5>必要数</h5>
+    const resultList = () => {
+        return (
             <ul>
                 {Object.entries(allMateriaCount()).map(([materia, count]) => (
                     <li key={materia}>
@@ -37,6 +36,13 @@ const Result = ({ CProb, allSuccessRate, allMateriaSlot }) => {
                     </li>
                 ))}
             </ul>
+        )
+    }
+
+    return (
+        <div className="container">
+            <h5>必要数</h5>
+            {slotError ? "大マテリアがはまりません！" : resultList()}
         </div>
     )
 }
