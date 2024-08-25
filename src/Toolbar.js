@@ -30,7 +30,7 @@ const Toolbar = ({ CProb, setCProb, materiaGenre, setMateriaGenre }) => {
                 <option value="製作">製作</option>
             </select><br />
             <label>累積確率:</label><br />
-            <input type="number" style={{ width: 80 }} value={CProbDisp} onChange={handleChangeCProb}></input>
+            <input type="number" style={{ width: 80 }} max={99} min={1} value={CProbDisp} onChange={handleChangeCProb}></input>
         </div>
     )
 }
